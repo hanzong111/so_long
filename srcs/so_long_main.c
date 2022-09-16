@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/14 22:24:33 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:31:23 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main()
 	void	*mlx;
 	void	*mlx_win;
 
-	mlx = mlx_init();c
+	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1000, 1000, "so_long");
 	mlx_loop(mlx);
 }
