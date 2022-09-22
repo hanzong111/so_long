@@ -6,7 +6,7 @@
 #    By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 20:26:19 by ojing-ha          #+#    #+#              #
-#    Updated: 2022/09/16 12:49:49 by ojing-ha         ###   ########.fr        #
+#    Updated: 2022/09/22 18:45:34 by ojing-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ CFLAGS	= -Wall -Werror -Wextra $(HEADER) #-fsanitize=address -g3
 LIBFTFLAGS	= -L$(LIBFT_DIR) -lft
 MLXFLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 
-SRC_FILES	= so_long_main
+SRC_FILES	= so_long_main\
+				sl_copy_img\
+		
 
 SRCS	= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS	= $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES)))
