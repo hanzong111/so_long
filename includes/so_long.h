@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/25 08:18:16 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/09/26 03:03:14 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ typedef struct s_sl_map
 }	t_sl_map;
 
 void	sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y);
-void	error_check(t_sl_map *map);
-void	format_check(t_sl_map *map);
-void	grid_gen(t_sl_map *map);
+void	error_check(int argc, char **argv, t_sl_map *map);
+void	format_check(char **argv, t_sl_map *map);
+void	grid_gen(char **argv, t_sl_map *map);
 
 void	map_init(t_sl_map *map);
 

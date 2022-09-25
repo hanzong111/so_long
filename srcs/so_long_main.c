@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/25 08:18:43 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/09/26 03:04:05 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,13 @@ int	render_next_frame(t_data *data)
 	return (0);
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
 	t_data		data;
 	t_sl_map	map;
 
-	error_check(&map);
+	error_check(argc, argv, &map);
+	grid_gen(argv, &map);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, 1000, 1000, "so_long");
 	data.x = 0;

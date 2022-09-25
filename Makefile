@@ -6,7 +6,7 @@
 #    By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 20:26:19 by ojing-ha          #+#    #+#              #
-#    Updated: 2022/09/22 18:45:34 by ojing-ha         ###   ########.fr        #
+#    Updated: 2022/09/26 03:04:19 by ojing-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,10 @@ MLXFLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 
 SRC_FILES	= so_long_main\
 				sl_copy_img\
+				sl_error_checks\
+				sl_initialize\
+				sl_format_checks\
+				sl_grid_gen\
 		
 
 SRCS	= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))
