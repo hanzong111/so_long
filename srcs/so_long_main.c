@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/22 21:23:46 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/09/25 08:18:43 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,13 @@ int	render_next_frame(t_data *data)
 int	main()
 {
 	t_data		data;
-	// t_sl_img	final_img;
+	t_sl_map	map;
 
+	error_check(&map);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, 1000, 1000, "so_long");
 	data.x = 0;
 	data.y = 0;
-
-	// final_img.img = mlx_new_image(data.mlx, 64, 64);
-	// draw_blue(&final_img);
-	// mlx_put_image_to_window(data.mlx, data.mlx_win, final_img.img, 0, 0);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_key_hook(data.mlx_win, event, &data);
 	mlx_loop(data.mlx);
