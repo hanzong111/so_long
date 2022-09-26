@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/26 17:57:21 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:50:15 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ void	draw_blue(t_sl_img *final_img)
 int	render_next_frame(t_data *data)
 {
 	static int	i = 0;
+	int		x = -1;
+	int		y = -1;
 	static int	temp;
-	char	*path_1 = "sprites/Player_run_1.xpm";
-	char	*path_2 = "sprites/Player_run_2.xpm";
-	char	*path_3 = "sprites/Player_run_3.xpm";
-	char	*path_4 = "sprites/Player_run_4.xpm";
+	char	*path_1 = "sprites/Coin_1.xpm";
+	char	*path_2 = "sprites/Coin_2.xpm";
+	char	*path_3 = "sprites/Coin_3.xpm";
+	char	*path_4 = "sprites/Coin_4.xpm";
 
 	i++;
 	temp = i % 40;
@@ -95,11 +97,14 @@ int	render_next_frame(t_data *data)
 	data->final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
 	data->final_img.width = SCREEN_W;
 	data->final_img.height= SCREEN_H;
-	draw_blue(&data->final_img);
-	sl_copy_image(&data->pillar, &data->final_img, 4, 4);
+	while (++x <= 10)
+	{
+		y = -1;
+		while (++y <= 10)
+			sl_copy_image(&data->pillar, &data->final_img, x, y);
+	}
 	sl_copy_image(&data->coin, &data->final_img, 6, 6);
-	sl_copy_image(&data->pillar, &data->final_img, 4, 5);
-	sl_copy_image(&data->door, &data->final_img, 3, 5);
+	sl_copy_image(&data->door, &data->final_img, 6, 7);
 	sl_copy_image(&data->player, &data->final_img, data->x, data->y);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->final_img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->final_img.img);
@@ -109,12 +114,14 @@ int	render_next_frame(t_data *data)
 
 void	get_sprites(t_data *data)
 {
-	char	*floor_path = "sprites/Pillar.xpm";
+	char	*floor_path = "sprites/Floor.xpm";
 	char	*coin_path = "sprites/Coin_1.xpm";
 	char	*door_path = "sprites/Door Opened.xpm";
 
 
 	data->coin.img = mlx_xpm_file_to_image(data->mlx, coin_path, &data->coin.width, &data->coin.height);
+	if (data->coin.img == NULL)
+		printf("nope\n");
 	data->door.img = mlx_xpm_file_to_image(data->mlx, door_path, &data->door.width, &data->door.height);
 	data->pillar.img = mlx_xpm_file_to_image(data->mlx, floor_path, &data->pillar.width, &data->pillar.height);
 }
