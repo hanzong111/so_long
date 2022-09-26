@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/26 03:04:05 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:57:21 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ typedef struct s_data
 	int		height;
 	int		counter;
 	void		*img;
+	t_sl_img	coin;
+	t_sl_img	pillar;
+	t_sl_img	player;
+	t_sl_img	door;
+	t_sl_img	final_img;
 }t_data;
 
 int event(int keycode, t_data *data)
 {
-	printf("keycode is %d\n", keycode);
 	if (keycode == 13) /* W */
 		data->y -= 1;
 	if (keycode == 1) /* S */
@@ -74,46 +78,57 @@ int	render_next_frame(t_data *data)
 	char	*path_2 = "sprites/Player_run_2.xpm";
 	char	*path_3 = "sprites/Player_run_3.xpm";
 	char	*path_4 = "sprites/Player_run_4.xpm";
-	char	*floor_path = "sprites/Pillar.xpm";
-	t_sl_img	sprite;
-	t_sl_img	final_img;
-	t_sl_img	floor;
 
 	i++;
 	temp = i % 40;
 	// printf("i is %d\n", i);
 	// printf("temp is %d\n", temp);
-	if (i != 1)
-		mlx_clear_window(data->mlx, data->mlx_win);
 	if (temp <= 10)
-		sprite.img = mlx_xpm_file_to_image(data->mlx, path_1, &sprite.width, &sprite.height);
+		data->player.img = mlx_xpm_file_to_image(data->mlx, path_1, &data->player.width, &data->player.height);
 	else if (temp <= 20)
-		sprite.img = mlx_xpm_file_to_image(data->mlx, path_2, &sprite.width, &sprite.height);
+		data->player.img = mlx_xpm_file_to_image(data->mlx, path_2, &data->player.width, &data->player.height);
 	else if (temp <= 30)
-		sprite.img = mlx_xpm_file_to_image(data->mlx, path_3, &sprite.width, &sprite.height);
+		data->player.img = mlx_xpm_file_to_image(data->mlx, path_3, &data->player.width, &data->player.height);
 	else if (temp <= 40)
-		sprite.img = mlx_xpm_file_to_image(data->mlx, path_4, &sprite.width, &sprite.height);
-	final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
-	draw_blue(&final_img);
-	floor.img = mlx_xpm_file_to_image(data->mlx, floor_path, &floor.width, &floor.height);
-	sl_copy_image(&floor, &final_img, 4, 4);
-	sl_copy_image(&floor, &final_img, 4, 5);
-	sl_copy_image(&sprite, &final_img, data->x, data->y);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, final_img.img, 0, 0);
-	mlx_destroy_image(data->mlx, final_img.img);
+		data->player.img = mlx_xpm_file_to_image(data->mlx, path_4, &data->player.width, &data->player.height);
+	// data->final_img = (t_sl_img *)malloc(sizeof(t_sl_img));
+	data->final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
+	data->final_img.width = SCREEN_W;
+	data->final_img.height= SCREEN_H;
+	draw_blue(&data->final_img);
+	sl_copy_image(&data->pillar, &data->final_img, 4, 4);
+	sl_copy_image(&data->coin, &data->final_img, 6, 6);
+	sl_copy_image(&data->pillar, &data->final_img, 4, 5);
+	sl_copy_image(&data->door, &data->final_img, 3, 5);
+	sl_copy_image(&data->player, &data->final_img, data->x, data->y);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->final_img.img, 0, 0);
+	mlx_destroy_image(data->mlx, data->final_img.img);
 	data->counter = 0;
 	return (0);
 }
 
+void	get_sprites(t_data *data)
+{
+	char	*floor_path = "sprites/Pillar.xpm";
+	char	*coin_path = "sprites/Coin_1.xpm";
+	char	*door_path = "sprites/Door Opened.xpm";
+
+
+	data->coin.img = mlx_xpm_file_to_image(data->mlx, coin_path, &data->coin.width, &data->coin.height);
+	data->door.img = mlx_xpm_file_to_image(data->mlx, door_path, &data->door.width, &data->door.height);
+	data->pillar.img = mlx_xpm_file_to_image(data->mlx, floor_path, &data->pillar.width, &data->pillar.height);
+}
+
 int	main(int argc, char **argv)
 {
-	t_data		data;
-	t_sl_map	map;
+	t_data			data;
+	t_sl_map		map;
 
 	error_check(argc, argv, &map);
 	grid_gen(argv, &map);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, 1000, 1000, "so_long");
+	get_sprites(&data);
 	data.x = 0;
 	data.y = 0;
 	mlx_loop_hook(data.mlx, render_next_frame, &data);

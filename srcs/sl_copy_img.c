@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:28:33 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/22 21:30:20 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:33:44 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y)
 	int				s_height;
 	int				s_width;
 
-	x *= SPRITE_SIZE;
-	y *= SPRITE_SIZE;
+	x *= SPRITE_W;
+	y *= SPRITE_H;
 	s.address = mlx_get_data_addr(src->img, &s.pixel_bits,
 			&s.size_line, &s.endian);
 	d.address = mlx_get_data_addr(des->img, &d.pixel_bits,

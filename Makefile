@@ -6,7 +6,7 @@
 #    By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 20:26:19 by ojing-ha          #+#    #+#              #
-#    Updated: 2022/09/26 03:04:19 by ojing-ha         ###   ########.fr        #
+#    Updated: 2022/09/26 15:37:18 by ojing-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJS_DIR	= objs/
 
 INCLUDES	= -I includes
 
-CFLAGS	= -Wall -Werror -Wextra $(HEADER) #-fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra $(HEADER) -fsanitize=address -g3
 LIBFTFLAGS	= -L$(LIBFT_DIR) -lft
 MLXFLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 
