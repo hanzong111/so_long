@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/05 22:33:10 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:36:18 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,6 @@ int event(int keycode, t_data *data)
 	printf("x is %d\n", data->x);
 	printf("y is %d\n", data->y);
 	return (0);
-}
-
-void	draw_blue(t_sl_img *final_img)
-{
-	int color = 0xABCDEF;
-	t_sl_data_addr		s;
-
-	s.address = mlx_get_data_addr(final_img->img, &s.pixel_bits, &s.size_line, &s.endian);
-	for(int y = 0; y < 360; ++y)
-	for(int x = 0; x < 640; ++x)
-	{
-    int pixel = (y * s.size_line) + (x * 4);
-
-    if (s.endian == 1)        // Most significant (Alpha) byte first
-    {
-        s.address[pixel + 0] = (color >> 24);
-        s.address[pixel + 1] = (color >> 16) & 0xFF;
-        s.address[pixel + 2] = (color >> 8) & 0xFF;
-        s.address[pixel + 3] = (color) & 0xFF;
-    }
-    else if (s.endian == 0)   // Least significant (Blue) byte first
-    {
-        s.address[pixel + 0] = (color) & 0xFF;
-        s.address[pixel + 1] = (color >> 8) & 0xFF;
-        s.address[pixel + 2] = (color >> 16) & 0xFF;
-        s.address[pixel + 3] = (color >> 24);
-    }
-	}
 }
 
 void	enemy_move(t_data *data, int i)
