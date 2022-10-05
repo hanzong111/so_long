@@ -6,7 +6,7 @@
 #    By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 20:26:19 by ojing-ha          #+#    #+#              #
-#    Updated: 2022/09/26 15:37:18 by ojing-ha         ###   ########.fr        #
+#    Updated: 2022/10/05 22:31:57 by ojing-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME		= so_long
 CC			= gcc
 
 LIBFT_DIR	= libft/
-MLX_DIR	= mlx/
+#MLX_DIR	= mlx/
+MLX_DIR	= minilibx-linux/
 SRCS_DIR	= srcs/
 OBJS_DIR	= objs/
 
@@ -42,20 +43,24 @@ all		:
 		make -C ${MLX_DIR}
 		make $(NAME)
 
+#$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
+#				$(CC) $(CFLAGS) -c $^ -o $@
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
-				$(CC) $(CFLAGS) -c $^ -o $@
+				$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-$(NAME)	: ${OBJS}
-		$(CC) $(CFLAGS) $(LIBFTFLAGS) $(MLXFLAGS) $(OBJS) -o $(NAME)
+
+#$(NAME)	: ${OBJS}
+#		$(CC) $(CFLAGS) $(LIBFTFLAGS) $(MLXFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFTFLAGS) -L${MLX_DIR} -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+
 
 clean	:
 		rm -rf $(OBJS_DIR)
-		make clean -C ${MLX_DIR}
 		make clean -C ${LIBFT_DIR}
 
 fclean	:	clean
 		rm -f $(NAME)
-		make fclean -C ${MLX_DIR}
 		make fclean -C ${LIBFT_DIR}
 
 re		:fclean all
