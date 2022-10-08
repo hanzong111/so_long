@@ -69,7 +69,7 @@ $(NAME)	: ${OBJS}
 
 %.o		: %.c
 		@${CC} ${FLAGS} $< -o $@
-		@echo "$(GREEN)Compiling $<$(DEF_COLOR)"
+		@echo "$(GREEN)Compiling $<...$(DEF_COLOR)"
 
 clean	:
 		@echo "$(MAGENTA) --------------------------CLEANING FT_PRINTF OBJECTS-------------------------- $(CYAN)"

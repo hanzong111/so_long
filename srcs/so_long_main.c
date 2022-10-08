@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/05 22:36:18 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/08 23:43:05 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 
 int event(int keycode, t_data *data)
 {
-	if (keycode == 'w') /* W  || 13*/
-		data->y -= 1 * SPRITE_H;
-	if (keycode == 's') /* S  || 1*/
-		data->y += 1 * SPRITE_H;
-	if (keycode == 'a') /* A  || 0*/
-		data->x -= 1 * SPRITE_W;
-	if (keycode == 'd') /* D  || 2*/
-		data->x += 1 * SPRITE_W;
-	printf("x is %d\n", data->x);
-	printf("y is %d\n", data->y);
+	if (keycode == 13) /* W  || 13*/
+		data->player.y -= 1;
+	if (keycode == 1) /* S  || 1*/
+		data->player.y += 1;
+	if (keycode == 0) /* A  || 0*/
+		data->player.x -= 1;
+	if (keycode == 2) /* D  || 2*/
+		data->player.x += 1;
 	return (0);
 }
 
@@ -74,29 +72,26 @@ int	render_next_frame(t_data *data)
 	// printf("i is %d\n", i);
 	// printf("temp is %d\n", temp);
 	if (temp <= 10)
-		data->player.img = mlx_xpm_file_to_image(data->mlx, path_1, &data->player.width, &data->player.height);
+		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_1, &data->sprites.player.width, &data->sprites.player.height);
 	else if (temp <= 20)
-		data->player.img = mlx_xpm_file_to_image(data->mlx, path_2, &data->player.width, &data->player.height);
+		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_2, &data->sprites.player.width, &data->sprites.player.height);
 	else if (temp <= 30)
-		data->player.img = mlx_xpm_file_to_image(data->mlx, path_3, &data->player.width, &data->player.height);
+		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_3, &data->sprites.player.width, &data->sprites.player.height);
 	else if (temp <= 40)
-		data->player.img = mlx_xpm_file_to_image(data->mlx, path_4, &data->player.width, &data->player.height);
+		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_4, &data->sprites.player.width, &data->sprites.player.height);
 	// data->final_img = (t_sl_img *)malloc(sizeof(t_sl_img));
-	data->final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
-	data->final_img.width = SCREEN_W;
-	data->final_img.height= SCREEN_H;
-	while (++x <= 10)
+	render_map(data);
+	while (++x <= 15)
 	{
 		y = -1;
-		while (++y <= 10)
-			sl_copy_image(&data->pillar, &data->final_img, x * SPRITE_W, y * SPRITE_H);
+		while (++y <= 15)
+			sl_copy_image(&data->sprites.pillar, &data->final_img, x * SPRITE_W, y * SPRITE_H);
 	}
 	enemy_move(data, i);
-	sl_copy_image(&data->door, &data->final_img, 0, 7);
-	sl_copy_image(&data->player, &data->final_img, data->x, data->y);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->final_img.img, 0, 0);
+	sl_copy_image(&data->sprites.door, &data->final_img, 0, 7);
+	sl_copy_image(&data->sprites.player, &data->final_img, data->player.x * SPRITE_W, data->player.y * SPRITE_H);
+	mlx_put_image_to_window(data->mlx, data->window, data->final_img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->final_img.img);
-	data->counter = 0;
 	return (0);
 }
 
@@ -107,9 +102,9 @@ void	get_sprites(t_data *data)
 	char	*door_path = "sprites/Door Opened.xpm";
 
 
-	data->coin.img = mlx_xpm_file_to_image(data->mlx, coin_path, &data->coin.width, &data->coin.height);
-	data->door.img = mlx_xpm_file_to_image(data->mlx, door_path, &data->door.width, &data->door.height);
-	data->pillar.img = mlx_xpm_file_to_image(data->mlx, floor_path, &data->pillar.width, &data->pillar.height);
+	data->sprites.coin.img = mlx_xpm_file_to_image(data->mlx, coin_path, &data->sprites.coin.width, &data->sprites.coin.height);
+	data->sprites.door.img = mlx_xpm_file_to_image(data->mlx, door_path, &data->sprites.door.width, &data->sprites.door.height);
+	data->sprites.pillar.img = mlx_xpm_file_to_image(data->mlx, floor_path, &data->sprites.pillar.width, &data->sprites.pillar.height);
 }
 
 int	main(int argc, char **argv)
@@ -117,21 +112,16 @@ int	main(int argc, char **argv)
 	t_data			data;
 
 	error_check(argc, argv, &data.map);
-	grid_gen(argv, &data.map);
+	grid_gen(argv, &data.map, &data);
 	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "so_long");
+	data.window = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "so_long");
 	get_sprites(&data);
-	data.enemy.f_frame = data.coin;
+	render_map(&data);
+	data.enemy.f_frame = data.sprites.coin;
 	data.enemy.x = 6 * SPRITE_W;
 	data.enemy.y = 6 * SPRITE_H;
 	data.enemy.counter = 0;
-	data.x = 30;
-	data.y = 30;
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
-	mlx_key_hook(data.mlx_win, event, &data);
+	mlx_key_hook(data.window, event, &data);
 	mlx_loop(data.mlx);
 }
-
-/*	mlx_init() : To create a mlx pointer. 	*/
-/*	mlx_new_window() : To create a window.	*/
-/*	mlx_hook() : To loop.					*/

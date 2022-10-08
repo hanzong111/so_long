@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sl_initialize.c                                    :+:      :+:    :+:   */
+/*   sl_render_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 07:22:32 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/08 23:13:12 by ojing-ha         ###   ########.fr       */
+/*   Created: 2022/10/08 21:54:05 by ojing-ha          #+#    #+#             */
+/*   Updated: 2022/10/08 23:42:27 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-/*	map->counter : 	To keep track of which line 			*/
-/*					I am checking when doing map checks		*/
-void	map_init(t_sl_map *map)
+void	render_map(t_data *data)
 {
-	map->map_w = 0;
-	map->map_h = 0;
-	map->line_len = 0;
-	map->space = 0;
-	map->wall = 0;
-	map->collectible = 0;
-	map->exit = 0;
-	map->player = 0;
-	map->enemy = 0;
-	map->counter = 1;
+	data->final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
+	data->final_img.width = SCREEN_W;
+	data->final_img.height = SCREEN_H;
 }

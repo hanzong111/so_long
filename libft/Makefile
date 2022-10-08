@@ -44,23 +44,20 @@ SRCS =	ft_atoi.c\
 		ft_putendl_fd.c\
 		ft_putnbr_fd.c\
 		get_next_line_utils.c\
-		get_next_line.c
+		get_next_line.c\
+		ft_lstnew.c\
+		ft_lstadd_front.c\
+		ft_lstsize.c\
+		ft_lstlast.c\
+		ft_lstadd_back.c\
+		ft_lstdelone.c\
+		ft_lstclear.c\
+		ft_lstiter.c\
+		ft_lstmap.c
 
 INCLUDES = .
 
 OBJS	= $(SRCS:.c=.o)
-
-BONUS	= ft_lstnew.c\
-		  ft_lstadd_front.c\
-		  ft_lstsize.c\
-		  ft_lstlast.c\
-		  ft_lstadd_back.c\
-		  ft_lstdelone.c\
-		  ft_lstclear.c\
-		  ft_lstiter.c\
-		  ft_lstmap.c
-		  
-BONUSOBJS = $(BONUS:.c=.o)
 
 NAME		= libft.a
 
@@ -70,7 +67,7 @@ CC = gcc
 
 LIB = ar rcs
 
-CLEAN = rm -f ${OBJS} ${BONUSOBJS}
+CLEAN = rm -f ${OBJS}
 
 FCLEAN = rm -f $(NAME)
 
@@ -95,7 +92,7 @@ $(NAME) : ${OBJS}
 	
 %.o: %.c
 		@${CC} ${FLAGS} -I ${INCLUDES} $< -o ${<:.c=.o} 
-		@echo "$(GREEN)Compiling $<$(DEF_COLOR)"
+		@echo "$(GREEN)Compiling $<...$(DEF_COLOR)"
 
 clean : 
 		@make clean -C ft_printf
@@ -116,8 +113,5 @@ fclean : clean
 		@echo "$(GREEN) --------------------------DONE--------------------------$(DEF_COLOR)"
 		@echo "\n"
 		@echo "$(GREEN) -------------$(RED)I $(CYAN)AM $(GREEN)DONE $(YELLOW)MADAFAKA$(GREEN)-------------------------- $(DEF_COLOR)"
-
-bonus : ${BONUSOBJS}
-		${LIB} $(NAME) ${BONUSOBJS}
 
 re :	fclean all

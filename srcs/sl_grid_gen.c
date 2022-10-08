@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:16:07 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/26 15:37:24 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/08 23:33:15 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,30 @@ void	map_char_count(t_sl_map *map, char *str)
 	}
 }
 
-void	grid_gen(char **argv, t_sl_map *map)
+void	get_player_position(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (data->map.grid[x] != NULL)
+	{
+		y = 0;
+		while (data->map.grid[x][y] != '\0')
+		{
+			if (data->map.grid[x][y] == 'P')
+			{
+				data->player.x = y;
+				data->player.y = x;
+				return ;
+			}
+			y++;
+		}
+		x++;
+	}
+}
+
+void	grid_gen(char **argv, t_sl_map *map, t_data *data)
 {
 	int	fd;
 	int	i;
@@ -60,4 +83,5 @@ void	grid_gen(char **argv, t_sl_map *map)
 			ft_printf("Error\nThere needs to be at least 1 exit\n");
 		exit (0);
 	}
+	get_player_position(data);
 }
