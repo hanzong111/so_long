@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/08 21:52:21 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/09 15:29:04 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,3 +129,12 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data.window, event, &data);
 	mlx_loop(data.mlx);
 }
+
+if (data->map.grid[x][y] == 'C')
+		print_collect(data, x, y);
+	else if (data->map.grid[x][y] == 'P')
+		print_player(data, x, y);
+	else if (data->map.grid[x][y] == '1')
+		print_wall(data, x, y);
+	else if (data->map.grid[x][y] == '0')
+		print_tile(data, x, y);

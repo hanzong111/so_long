@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/08 23:08:55 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:03:30 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,10 @@ typedef struct s_sl_player
 typedef struct s_sl_sprites
 {
 	t_sl_img		coin;
-	t_sl_img		pillar;
 	t_sl_img		player;
 	t_sl_img		door;
+	t_sl_img		floor;
+	t_sl_img		wall;
 	t_sl_map		map;
 }	t_sl_sprites;
 
@@ -81,8 +82,8 @@ typedef struct s_data
 {
 	void			*mlx;
 	void			*window;
-	int				x;
-	int				y;
+	int				start_x;
+	int				start_y;
 
 	t_sl_sprites	sprites;
 	t_sl_img		final_img;
@@ -95,7 +96,11 @@ void	sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y);
 void	error_check(int argc, char **argv, t_sl_map *map);
 void	format_check(char **argv, t_sl_map *map);
 void	grid_gen(char **argv, t_sl_map *map, t_data *data);
-void	render_map(t_data *data);
 void	map_init(t_sl_map *map);
+void	render_map(t_data *data);
+void	print_floor(t_data *data, int x, int y);
+void	print_wall(t_data *data, int x, int y);
+void	print_collectables(t_data *data, int x, int y);
+void	print_exit(t_data *data, int x, int y);
 
 #endif
