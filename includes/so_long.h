@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/09 18:03:30 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/09 19:52:12 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_sl_map
 
 typedef struct s_sl_player
 {
-	t_sl_img	f_frame;
+	t_sl_img	ff;
 	int			counter;
 	int			x;
 	int			y;
@@ -90,6 +90,8 @@ typedef struct s_data
 	t_sl_map		map;
 	t_sl_player		enemy;
 	t_sl_player		player;
+
+	t_sl_img		coin_ff;
 }	t_data;
 
 void	sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y);
@@ -102,5 +104,6 @@ void	print_floor(t_data *data, int x, int y);
 void	print_wall(t_data *data, int x, int y);
 void	print_collectables(t_data *data, int x, int y);
 void	print_exit(t_data *data, int x, int y);
+void	get_sprites(t_data *data);
 
 #endif
