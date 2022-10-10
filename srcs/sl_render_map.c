@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 21:54:05 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/09 17:01:59 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:05:18 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	get_data(t_data *data)
 	data->final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
 	data->final_img.width = SCREEN_W;
 	data->final_img.height = SCREEN_H;
-	data->start_x = 7 - data->player.x;
-	data->start_y = 7 - data->player.y;
+	data->start_x = 7 * SPRITE_W - data->player.x;
+	data->start_y = 7 * SPRITE_H - data->player.y;
 }
 
 void	render_map(t_data *data)
@@ -55,6 +55,6 @@ void	render_map(t_data *data)
 		}
 		height++;
 	}
-	sl_copy_image(&data->sprites.player, &data->final_img,
+	sl_copy_image(&data->player.ff, &data->final_img,
 		7 * SPRITE_H, 7 * SPRITE_W);
 }

@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/09 20:01:02 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:06:25 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 
 int event(int keycode, t_data *data)
 {
+	if (keycode == 53)
+	{
+		system("leaks so_long");
+		exit(0);
+	}
 	if (keycode == 13) /* W  || 13*/
-		data->player.y -= 1;
+		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
 	if (keycode == 1) /* S  || 1*/
-		data->player.y += 1;
+		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
 	if (keycode == 0) /* A  || 0*/
-		data->player.x -= 1;
+		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
 	if (keycode == 2) /* D  || 2*/
-		data->player.x += 1;
+		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
 	return (0);
 }
 
@@ -56,43 +61,39 @@ void	enemy_move(t_data *data, int i)
 	sl_copy_image(&data->enemy.ff, &data->final_img, data->enemy.x - data->start_x * SPRITE_W, data->enemy.y - data->start_y * SPRITE_H);
 }
 
+void	check_move_list(t_data *data)
+{
+	static int	counter;
+
+	if (data->player.move_list != NULL)
+	{
+		if (data->player.move_list->content == MOVE_UP)
+			data->player.y -= 16;
+		else if (data->player.move_list->content == MOVE_DOWN)
+			data->player.y += 16;
+		else if (data->player.move_list->content == MOVE_LEFT)
+			data->player.x -= 16;
+		else if (data->player.move_list->content == MOVE_RIGHT)
+			data->player.x += 16;
+		counter++;
+	}
+	if (counter % 4 == 0 && data->player.move_list != NULL)
+	{
+		printf("no\n");
+		data->player.move_list = data->player.move_list->next;
+	}
+}
+
 int	render_next_frame(t_data *data)
 {
-	static int	i = 0;
-	static int	temp;
-	char	*path_1 = "sprites/Player_run_1.xpm";
-	char	*path_2 = "sprites/Player_run_2.xpm";
-	char	*path_3 = "sprites/Player_run_3.xpm";
-	char	*path_4 = "sprites/Player_run_4.xpm";
-	char	*coin_path1 = "sprites/Coin_1.xpm";
-	char	*coin_path2 = "sprites/Coin_2.xpm";
-	char	*coin_path3 = "sprites/Coin_3.xpm";
-	char	*coin_path4 = "sprites/Coin_4.xpm";
+	static int	i;
 
 	i++;
-	temp = i % 20;
-	if (temp <= 5)
-	{
-		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_1, &data->sprites.player.width, &data->sprites.player.height);
-		data->sprites.coin.img = mlx_xpm_file_to_image(data->mlx, coin_path1, &data->sprites.coin.width, &data->sprites.coin.height);
-	}
-	else if (temp <= 10)
-	{
-		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_2, &data->sprites.player.width, &data->sprites.player.height);
-		data->sprites.coin.img = mlx_xpm_file_to_image(data->mlx, coin_path2, &data->sprites.coin.width, &data->sprites.coin.height);
-	}
-	else if (temp <= 15)
-	{
-		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_3, &data->sprites.player.width, &data->sprites.player.height);
-		data->sprites.coin.img = mlx_xpm_file_to_image(data->mlx, coin_path3, &data->sprites.coin.width, &data->sprites.coin.height);
-	}
-	else if (temp <= 20)
-	{
-		data->sprites.player.img = mlx_xpm_file_to_image(data->mlx, path_4, &data->sprites.player.width, &data->sprites.player.height);
-		data->sprites.coin.img = mlx_xpm_file_to_image(data->mlx, coin_path4, &data->sprites.coin.width, &data->sprites.coin.height);
-	}
+	printf("main loop %d\n", i);
+	check_move_list(data);
+	choose_frame(i, data);
 	render_map(data);
-	enemy_move(data, i);
+	// enemy_move(data, i);
 	mlx_put_image_to_window(data->mlx, data->window, data->final_img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->final_img.img);
 	return (0);
@@ -107,7 +108,8 @@ int	main(int argc, char **argv)
 	data.mlx = mlx_init();
 	data.window = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "so_long");
 	get_sprites(&data);
-	data.enemy.ff = data.sprites.coin;
+	data.player.move_list = NULL;
+	data.enemy.ff = data.sprites.coin_1;
 	data.enemy.x = 6 * SPRITE_W;
 	data.enemy.y = 6 * SPRITE_H;
 	data.enemy.counter = 0;

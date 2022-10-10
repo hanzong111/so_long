@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:16:07 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/09 15:41:43 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:06:48 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	get_player_position(t_data *data)
 		{
 			if (data->map.grid[x][y] == 'P')
 			{
-				data->player.x = y;
-				data->player.y = x;
+				data->player.x = y * SPRITE_W;
+				data->player.y = x * SPRITE_H;
 				return ;
 			}
 			y++;
