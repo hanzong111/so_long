@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 21:54:05 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:05:18 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:40:29 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	render_map(t_data *data)
 		width = 0;
 		while (data->map.grid[height][width] != '\0')
 		{
-			if (data->start_x + width < 0)
+			if (data->start_x + (width * SPRITE_W) < -SPRITE_W)
 				width++;
 			else
 			{

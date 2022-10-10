@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:06:25 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:47:49 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,14 @@
 int event(int keycode, t_data *data)
 {
 	if (keycode == 53)
-	{
-		system("leaks so_long");
 		exit(0);
-	}
-	if (keycode == 13) /* W  || 13*/
+	if (keycode == 'w') /* W  || 13*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
-	if (keycode == 1) /* S  || 1*/
+	if (keycode == 's') /* S  || 1*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
-	if (keycode == 0) /* A  || 0*/
+	if (keycode == 'a') /* A  || 0*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
-	if (keycode == 2) /* D  || 2*/
+	if (keycode == 'd') /* D  || 2*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
 	return (0);
 }
@@ -68,20 +65,17 @@ void	check_move_list(t_data *data)
 	if (data->player.move_list != NULL)
 	{
 		if (data->player.move_list->content == MOVE_UP)
-			data->player.y -= 16;
+			data->player.y -= SPRITE_H / PLAYER_MOVE;
 		else if (data->player.move_list->content == MOVE_DOWN)
-			data->player.y += 16;
+			data->player.y += SPRITE_H / PLAYER_MOVE;
 		else if (data->player.move_list->content == MOVE_LEFT)
-			data->player.x -= 16;
+			data->player.x -= SPRITE_W / PLAYER_MOVE;
 		else if (data->player.move_list->content == MOVE_RIGHT)
-			data->player.x += 16;
+			data->player.x += SPRITE_W / PLAYER_MOVE;
 		counter++;
 	}
-	if (counter % 4 == 0 && data->player.move_list != NULL)
-	{
-		printf("no\n");
+	if (counter % PLAYER_MOVE == 0 && data->player.move_list != NULL)
 		data->player.move_list = data->player.move_list->next;
-	}
 }
 
 int	render_next_frame(t_data *data)
@@ -89,7 +83,6 @@ int	render_next_frame(t_data *data)
 	static int	i;
 
 	i++;
-	printf("main loop %d\n", i);
 	check_move_list(data);
 	choose_frame(i, data);
 	render_map(data);

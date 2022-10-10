@@ -6,15 +6,15 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 22:41:03 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:48:59 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <mlx.h>
-// # include "../minilibx-linux/mlx.h"
+// # include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -26,8 +26,9 @@
 # define SPRITE_H 64
 
 # define ENEMY_STEPS 2
-# define PLAYER_SPEED 20
-# define COIN_SPEED 30
+# define PLAYER_MOVE 16
+# define PLAYER_ANIM 20
+# define COIN_ANIM 30
 
 # define MOVE_UP 1
 # define MOVE_DOWN 2
