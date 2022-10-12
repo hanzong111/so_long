@@ -6,7 +6,7 @@
 #    By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 20:26:19 by ojing-ha          #+#    #+#              #
-#    Updated: 2022/10/10 23:50:07 by ojing-ha         ###   ########.fr        #
+#    Updated: 2022/10/13 01:19:48 by ojing-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_FILES	= so_long_main\
 				sl_render_utils\
 				sl_sprites\
 				sl_animations\
+				sl_move_list\
 				sl_move_list_utils\
 		
 

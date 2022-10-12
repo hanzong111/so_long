@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:48:59 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:42:46 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define SPRITE_H 64
 
 # define ENEMY_STEPS 2
-# define PLAYER_MOVE 16
+# define PLAYER_MOVE 8
 # define PLAYER_ANIM 20
 # define COIN_ANIM 30
 
@@ -34,6 +34,9 @@
 # define MOVE_DOWN 2
 # define MOVE_LEFT 3
 # define MOVE_RIGHT 4
+
+# define EXIT_CLOSED 1
+# define EXIT_OPENED 2
 
 typedef struct s_sl_data_addr
 {
@@ -63,12 +66,11 @@ typedef struct s_sl_map
 
 	int		space;
 	int		wall;
-	int		collectible;
+	int		coins;
 	int		exit;
 	int		player;
 	int		enemy;
 }	t_sl_map;
-
 
 typedef struct s_sl_sprites
 {
@@ -80,7 +82,8 @@ typedef struct s_sl_sprites
 	t_sl_img		player_2;
 	t_sl_img		player_3;
 	t_sl_img		player_4;
-	t_sl_img		door;
+	t_sl_img		door_opened;
+	t_sl_img		door_closed;
 	t_sl_img		floor;
 	t_sl_img		wall;
 	t_sl_map		map;
@@ -101,6 +104,13 @@ typedef struct s_sl_player
 	t_sl_list		*move_list;
 }	t_sl_player;
 
+typedef struct s_sl_counters
+{
+	int	player_moves;
+	int	picked_coins;
+	int	exit_status;
+}	t_sl_counters;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -115,21 +125,25 @@ typedef struct s_data
 	t_sl_player		player;
 
 	t_sl_img		coin_ff;
+	t_sl_img		door_ff;
+	t_sl_counters	counters;
 }	t_data;
 
 void		sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y);
 void		error_check(int argc, char **argv, t_sl_map *map);
 void		format_check(char **argv, t_sl_map *map);
 void		grid_gen(char **argv, t_sl_map *map, t_data *data);
-void		map_init(t_sl_map *map);
+void		var_init(t_data *data);
 void		render_map(t_data *data);
 void		print_floor(t_data *data, int x, int y);
 void		print_wall(t_data *data, int x, int y);
-void		print_collectables(t_data *data, int x, int y);
+void		print_coin(t_data *data, int x, int y);
 void		print_exit(t_data *data, int x, int y);
 void		get_sprites(t_data *data);
 void		choose_frame(int tick, t_data *data);
 void		sl_lstadd_back(t_sl_list **lst, t_sl_list *new);
 t_sl_list	*sl_lstnew(int content);
+void		check_move_list(t_data *data);
+int			check_move(int keycode, t_data *data, int x, int y);
 
 #endif

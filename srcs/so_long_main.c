@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:47:49 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:05:43 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 /*	export DISPLAY=localhost:0.0	*/
 
-int event(int keycode, t_data *data)
+int	event(int keycode, t_data *data)
 {
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 'w') /* W  || 13*/
-		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
-	if (keycode == 's') /* S  || 1*/
-		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
-	if (keycode == 'a') /* A  || 0*/
-		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
-	if (keycode == 'd') /* D  || 2*/
-		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
+	if (check_move(keycode, data, data->player.x / SPRITE_W,
+			data->player.y / SPRITE_H))
+	{
+		if (keycode == 65307) /*65307 || 53*/
+			exit(0);
+		if (keycode == 'w') /* W  || 13*/
+			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
+		if (keycode == 's') /* S  || 1*/
+			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
+		if (keycode == 'a') /* A  || 0*/
+			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
+		if (keycode == 'd') /* D  || 2*/
+			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
+	}
 	return (0);
 }
 
@@ -33,7 +37,7 @@ void	enemy_move(t_data *data, int i)
 {
 	int	max;
 	int	min;
-	int temp;
+	int	temp;
 
 	temp = i;
 	max = 8 * SPRITE_H;
@@ -58,26 +62,6 @@ void	enemy_move(t_data *data, int i)
 	sl_copy_image(&data->enemy.ff, &data->final_img, data->enemy.x - data->start_x * SPRITE_W, data->enemy.y - data->start_y * SPRITE_H);
 }
 
-void	check_move_list(t_data *data)
-{
-	static int	counter;
-
-	if (data->player.move_list != NULL)
-	{
-		if (data->player.move_list->content == MOVE_UP)
-			data->player.y -= SPRITE_H / PLAYER_MOVE;
-		else if (data->player.move_list->content == MOVE_DOWN)
-			data->player.y += SPRITE_H / PLAYER_MOVE;
-		else if (data->player.move_list->content == MOVE_LEFT)
-			data->player.x -= SPRITE_W / PLAYER_MOVE;
-		else if (data->player.move_list->content == MOVE_RIGHT)
-			data->player.x += SPRITE_W / PLAYER_MOVE;
-		counter++;
-	}
-	if (counter % PLAYER_MOVE == 0 && data->player.move_list != NULL)
-		data->player.move_list = data->player.move_list->next;
-}
-
 int	render_next_frame(t_data *data)
 {
 	static int	i;
@@ -96,12 +80,12 @@ int	main(int argc, char **argv)
 {
 	t_data			data;
 
+	var_init(&data);
 	error_check(argc, argv, &data.map);
 	grid_gen(argv, &data.map, &data);
 	data.mlx = mlx_init();
 	data.window = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "so_long");
 	get_sprites(&data);
-	data.player.move_list = NULL;
 	data.enemy.ff = data.sprites.coin_1;
 	data.enemy.x = 6 * SPRITE_W;
 	data.enemy.y = 6 * SPRITE_H;

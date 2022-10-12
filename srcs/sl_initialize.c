@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:22:32 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/09 15:41:41 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:57:21 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 /*	map->counter : 	To keep track of which line 			*/
 /*					I am checking when doing map checks		*/
-void	map_init(t_sl_map *map)
+void	var_init(t_data *data)
 {
-	map->map_w = 0;
-	map->map_h = 0;
-	map->line_len = 0;
-	map->space = 0;
-	map->wall = 0;
-	map->collectible = 0;
-	map->exit = 0;
-	map->player = 0;
-	map->enemy = 0;
-	map->counter = 1;
+	data->map.map_w = 0;
+	data->map.map_h = 0;
+	data->map.line_len = 0;
+	data->map.space = 0;
+	data->map.wall = 0;
+	data->map.coins = 0;
+	data->map.exit = 0;
+	data->map.player = 0;
+	data->map.enemy = 0;
+	data->map.counter = 1;
+	data->counters.picked_coins = 0;
+	data->counters.player_moves = 0;
+	data->counters.exit_status = EXIT_CLOSED;
+	data->player.move_list = NULL;
 }

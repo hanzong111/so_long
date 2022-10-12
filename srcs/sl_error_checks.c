@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:54:00 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/09/26 01:33:36 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:04:25 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	arguments_check(int argc, char **argv)
 void	error_check(int argc, char **argv, t_sl_map *map)
 {
 	arguments_check(argc, argv);
-	map_init(map);
 	get_wh_char_check(argv, map);
 	format_check(argv, map);
 }

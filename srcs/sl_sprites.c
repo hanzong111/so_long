@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 17:10:52 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 18:19:11 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:40:43 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,22 @@ void	get_player(t_data *data)
 void	get_sprites(t_data *data)
 {
 	char	*floor_path;
-	char	*door_path;
+	char	*door_opened_path;
+	char	*door_closed_path;
 	char	*wall_path;
 
 	floor_path = "sprites/Floor.xpm";
-	door_path = "sprites/Door Opened.xpm";
+	door_opened_path = "sprites/Door Opened.xpm";
+	door_closed_path = "sprites/Door Closed.xpm";
 	wall_path = "sprites/Wall.xpm";
 	get_coin(data);
 	get_player(data);
-	data->sprites.door.img = mlx_xpm_file_to_image(data->mlx, door_path, &data->sprites.door.width, &data->sprites.door.height);
-	data->sprites.floor.img = mlx_xpm_file_to_image(data->mlx, floor_path, &data->sprites.floor.width, &data->sprites.floor.height);
-	data->sprites.wall.img = mlx_xpm_file_to_image(data->mlx, wall_path, &data->sprites.wall.width, &data->sprites.wall.height);
+	data->sprites.door_opened.img = mlx_xpm_file_to_image(data->mlx, door_opened_path,
+			&data->sprites.door_opened.width, &data->sprites.door_opened.height);
+	data->sprites.door_closed.img = mlx_xpm_file_to_image(data->mlx, door_closed_path,
+			&data->sprites.door_closed.width, &data->sprites.door_closed.height);
+	data->sprites.floor.img = mlx_xpm_file_to_image(data->mlx, floor_path,
+			&data->sprites.floor.width, &data->sprites.floor.height);
+	data->sprites.wall.img = mlx_xpm_file_to_image(data->mlx, wall_path,
+			&data->sprites.wall.width, &data->sprites.wall.height);
 }

@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:16:07 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:06:48 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/12 23:57:23 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	map_char_count(t_sl_map *map, char *str)
 	while (*str != '\0')
 	{
 		if (*str == 'C')
-			map->collectible++;
+			map->coins++;
 		else if (*str == 'E')
 			map->exit++;
 		else if (*str == 'P')

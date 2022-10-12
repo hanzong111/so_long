@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 21:54:05 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:40:29 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/12 23:56:05 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	copy_tile(t_data *data, int x, int y)
 {
 	if (data->map.grid[y][x] == 'C')
-		print_collectables(data, x, y);
+		print_coin(data, x, y);
 	else if (data->map.grid[y][x] == 'E')
 		print_exit(data, x, y);
 	else if (data->map.grid[y][x] == '1')
