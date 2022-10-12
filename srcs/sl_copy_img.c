@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:28:33 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:42:33 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:28:00 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y)
 	d.address = mlx_get_data_addr(des->img, &d.pixel_bits,
 			&d.size_line, &d.endian);
 	s_height = get_start_pixel(y);
-	while (++s_height < src->height && (s_height + y) < des->height)
+	while (++s_height < src->h && (s_height + y) < des->h)
 	{
 		s_width = get_start_pixel(x);
-		while (++s_width < src->width && (s_width + x) < des->height)
+		while (++s_width < src->w && (s_width + x) < des->h)
 		{
 			s.pixel = (s_height * s.size_line) + (s_width * 4);
 			d.pixel = ((s_height + y) * d.size_line) + ((s_width + x) * 4);

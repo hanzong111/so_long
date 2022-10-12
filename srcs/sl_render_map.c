@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 21:54:05 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 02:11:34 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:28:17 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	copy_tile(t_data *data, int x, int y)
 void	get_data(t_data *data)
 {
 	data->final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
-	data->final_img.width = SCREEN_W;
+	data->final_img.w = SCREEN_W;
 	data->final_img.h = SCREEN_H;
 	data->start_x = 7 * SPRITE_W - data->player.x;
 	data->start_y = 7 * SPRITE_H - data->player.y;
