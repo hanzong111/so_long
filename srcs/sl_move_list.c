@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 22:15:47 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 01:50:22 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:07:40 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	check_coins_exit(t_data *data, int x, int y)
 	if (data->map.coins == data->counters.picked_coins)
 	{
 		data->counters.exit_status = EXIT_OPENED;
-		data->door_ff = data->sprites.door_opened;
+		data->door_ff = data->sprites.door_o;
 	}
 	if (data->map.grid[y][x] == 'E')
 	{
-		if(data->counters.exit_status == EXIT_OPENED)
+		if (data->counters.exit_status == EXIT_OPENED)
 		{
 			ft_printf("Congratz ! U have won nothing :)\n");
 			exit (0);
@@ -81,10 +81,10 @@ void	check_move_list(t_data *data)
 	if (counter % PLAYER_MOVE == 0 && data->player.move_list != NULL)
 	{
 		temp = data->player.move_list;
-		check_coins_exit(data, data->player.x / SPRITE_W, data->player.y / SPRITE_H);
+		check_coins_exit(data, data->player.x / SPRITE_W,
+			data->player.y / SPRITE_H);
 		data->player.move_list = data->player.move_list->next;
 		free(temp);
 		data->counters.player_moves++;
-		printf("player move : %d\n", data->counters.player_moves);
 	}
 }

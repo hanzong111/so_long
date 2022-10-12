@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:18:45 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 01:42:47 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:05:24 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	choose_coin(int temp, t_data *data)
 void	choose_door(t_data *data)
 {
 	if (data->counters.exit_status == EXIT_CLOSED)
-		data->door_ff = data->sprites.door_closed;
+		data->door_ff = data->sprites.door_c;
 	else
-		data->door_ff = data->sprites.door_opened;
+		data->door_ff = data->sprites.door_o;
 }
 
 void	choose_frame(int tick, t_data *data)

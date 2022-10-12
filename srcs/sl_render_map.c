@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 21:54:05 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/12 23:56:05 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:11:34 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	get_data(t_data *data)
 {
 	data->final_img.img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
 	data->final_img.width = SCREEN_W;
-	data->final_img.height = SCREEN_H;
+	data->final_img.h = SCREEN_H;
 	data->start_x = 7 * SPRITE_W - data->player.x;
 	data->start_y = 7 * SPRITE_H - data->player.y;
 }
@@ -36,24 +36,24 @@ void	get_data(t_data *data)
 void	render_map(t_data *data)
 {
 	int	width;
-	int	height;
+	int	h;
 
 	get_data(data);
-	height = 0;
-	while (data->map.grid[height] != NULL)
+	h = 0;
+	while (data->map.grid[h] != NULL)
 	{
 		width = 0;
-		while (data->map.grid[height][width] != '\0')
+		while (data->map.grid[h][width] != '\0')
 		{
 			if (data->start_x + (width * SPRITE_W) < -SPRITE_W)
 				width++;
 			else
 			{
-				copy_tile(data, width, height);
+				copy_tile(data, width, h);
 				width++;
 			}
 		}
-		height++;
+		h++;
 	}
 	sl_copy_image(&data->player.ff, &data->final_img,
 		7 * SPRITE_H, 7 * SPRITE_W);

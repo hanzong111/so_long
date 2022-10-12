@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 17:10:52 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 01:40:43 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:13:44 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	get_coin(t_data *data)
 	coin_3 = "sprites/Coin_3.xpm";
 	coin_4 = "sprites/Coin_4.xpm";
 	data->sprites.coin_1.img = mlx_xpm_file_to_image(data->mlx, coin_1,
-			&data->sprites.coin_1.width, &data->sprites.coin_1.height);
+			&data->sprites.coin_1.w, &data->sprites.coin_1.h);
 	data->sprites.coin_2.img = mlx_xpm_file_to_image(data->mlx, coin_2,
-			&data->sprites.coin_2.width, &data->sprites.coin_2.height);
+			&data->sprites.coin_2.w, &data->sprites.coin_2.h);
 	data->sprites.coin_3.img = mlx_xpm_file_to_image(data->mlx, coin_3,
-			&data->sprites.coin_3.width, &data->sprites.coin_3.height);
+			&data->sprites.coin_3.w, &data->sprites.coin_3.h);
 	data->sprites.coin_4.img = mlx_xpm_file_to_image(data->mlx, coin_4,
-			&data->sprites.coin_4.width, &data->sprites.coin_4.height);
+			&data->sprites.coin_4.w, &data->sprites.coin_4.h);
 }
 
 void	get_player(t_data *data)
@@ -45,34 +45,34 @@ void	get_player(t_data *data)
 	player_3 = "sprites/Player_run_3.xpm";
 	player_4 = "sprites/Player_run_4.xpm";
 	data->sprites.player_1.img = mlx_xpm_file_to_image(data->mlx, player_1,
-			&data->sprites.player_1.width, &data->sprites.player_1.height);
+			&data->sprites.player_1.w, &data->sprites.player_1.h);
 	data->sprites.player_2.img = mlx_xpm_file_to_image(data->mlx, player_2,
-			&data->sprites.player_2.width, &data->sprites.player_2.height);
+			&data->sprites.player_2.w, &data->sprites.player_2.h);
 	data->sprites.player_3.img = mlx_xpm_file_to_image(data->mlx, player_3,
-			&data->sprites.player_3.width, &data->sprites.player_3.height);
+			&data->sprites.player_3.w, &data->sprites.player_3.h);
 	data->sprites.player_4.img = mlx_xpm_file_to_image(data->mlx, player_4,
-			&data->sprites.player_4.width, &data->sprites.player_4.height);
+			&data->sprites.player_4.w, &data->sprites.player_4.h);
 }
 
 void	get_sprites(t_data *data)
 {
 	char	*floor_path;
-	char	*door_opened_path;
-	char	*door_closed_path;
+	char	*door_o_path;
+	char	*door_c_path;
 	char	*wall_path;
 
 	floor_path = "sprites/Floor.xpm";
-	door_opened_path = "sprites/Door Opened.xpm";
-	door_closed_path = "sprites/Door Closed.xpm";
+	door_o_path = "sprites/Door Opened.xpm";
+	door_c_path = "sprites/Door Closed.xpm";
 	wall_path = "sprites/Wall.xpm";
 	get_coin(data);
 	get_player(data);
-	data->sprites.door_opened.img = mlx_xpm_file_to_image(data->mlx, door_opened_path,
-			&data->sprites.door_opened.width, &data->sprites.door_opened.height);
-	data->sprites.door_closed.img = mlx_xpm_file_to_image(data->mlx, door_closed_path,
-			&data->sprites.door_closed.width, &data->sprites.door_closed.height);
+	data->sprites.door_o.img = mlx_xpm_file_to_image(data->mlx, door_o_path,
+			&data->sprites.door_o.w, &data->sprites.door_o.h);
+	data->sprites.door_c.img = mlx_xpm_file_to_image(data->mlx, door_c_path,
+			&data->sprites.door_c.w, &data->sprites.door_c.h);
 	data->sprites.floor.img = mlx_xpm_file_to_image(data->mlx, floor_path,
-			&data->sprites.floor.width, &data->sprites.floor.height);
+			&data->sprites.floor.w, &data->sprites.floor.h);
 	data->sprites.wall.img = mlx_xpm_file_to_image(data->mlx, wall_path,
-			&data->sprites.wall.width, &data->sprites.wall.height);
+			&data->sprites.wall.w, &data->sprites.wall.h);
 }

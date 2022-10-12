@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 01:42:46 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:12:40 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 # define EXIT_CLOSED 1
 # define EXIT_OPENED 2
 
+// Event definition
+# define ON_DESTROY 17
+
 typedef struct s_sl_data_addr
 {
 	char	*address;
@@ -50,8 +53,8 @@ typedef struct s_sl_data_addr
 typedef struct s_sl_img
 {
 	void	*img;
-	int		width;
-	int		height;
+	int		w;
+	int		h;
 }	t_sl_img;
 
 typedef struct s_sl_map
@@ -82,8 +85,8 @@ typedef struct s_sl_sprites
 	t_sl_img		player_2;
 	t_sl_img		player_3;
 	t_sl_img		player_4;
-	t_sl_img		door_opened;
-	t_sl_img		door_closed;
+	t_sl_img		door_o;
+	t_sl_img		door_c;
 	t_sl_img		floor;
 	t_sl_img		wall;
 	t_sl_map		map;

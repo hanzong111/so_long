@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 01:05:43 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/13 02:01:23 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,15 @@ int	render_next_frame(t_data *data)
 	return (0);
 }
 
+int	sl_close_window(t_data *data)
+{
+	data->start_x = 3;
+	ft_printf("Window closed.\n");
+	ft_printf("Exiting so_long...\n");
+	exit(0);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data			data;
@@ -83,14 +92,17 @@ int	main(int argc, char **argv)
 	var_init(&data);
 	error_check(argc, argv, &data.map);
 	grid_gen(argv, &data.map, &data);
+	ft_printf("Checking map...\n");
 	data.mlx = mlx_init();
 	data.window = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "so_long");
 	get_sprites(&data);
+	ft_printf("Getting beautiful sprites...\n");
 	data.enemy.ff = data.sprites.coin_1;
 	data.enemy.x = 6 * SPRITE_W;
 	data.enemy.y = 6 * SPRITE_H;
 	data.enemy.counter = 0;
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_key_hook(data.window, event, &data);
+	mlx_hook(data.window, ON_DESTROY, 0L, sl_close_window, &data);
 	mlx_loop(data.mlx);
 }
