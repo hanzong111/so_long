@@ -6,15 +6,15 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 02:12:40 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:13:36 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-// # include <mlx.h>
-# include "../minilibx-linux/mlx.h"
+# include <mlx.h>
+// # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -26,7 +26,7 @@
 # define SPRITE_H 64
 
 # define ENEMY_STEPS 2
-# define PLAYER_MOVE 8
+# define PLAYER_MOVE 4
 # define PLAYER_ANIM 20
 # define COIN_ANIM 30
 
@@ -104,6 +104,7 @@ typedef struct s_sl_player
 	int				counter;
 	int				x;
 	int				y;
+	int				state;
 	t_sl_list		*move_list;
 }	t_sl_player;
 
@@ -112,6 +113,7 @@ typedef struct s_sl_counters
 	int	player_moves;
 	int	picked_coins;
 	int	exit_status;
+	int	loop_count;
 }	t_sl_counters;
 
 typedef struct s_data
@@ -147,6 +149,6 @@ void		choose_frame(int tick, t_data *data);
 void		sl_lstadd_back(t_sl_list **lst, t_sl_list *new);
 t_sl_list	*sl_lstnew(int content);
 void		check_move_list(t_data *data);
-int			check_move(int keycode, t_data *data, int x, int y);
+int			check_move(t_data *data, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/13 02:01:23 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:30:43 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 
 int	event(int keycode, t_data *data)
 {
-	if (check_move(keycode, data, data->player.x / SPRITE_W,
-			data->player.y / SPRITE_H))
-	{
-		if (keycode == 65307) /*65307 || 53*/
+	// if (check_move(keycode, data, data->player.x / SPRITE_W,
+	// 		data->player.y / SPRITE_H))
+	// {
+		if (keycode == 53) /*65307 || 53*/
 			exit(0);
-		if (keycode == 'w') /* W  || 13*/
+		if (keycode == 13) /* W  || 13*/
 			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
-		if (keycode == 's') /* S  || 1*/
+		if (keycode == 1) /* S  || 1*/
 			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
-		if (keycode == 'a') /* A  || 0*/
+		if (keycode == 0) /* A  || 0*/
 			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
-		if (keycode == 'd') /* D  || 2*/
+		if (keycode == 2) /* D  || 2*/
 			sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
-	}
+	// }
 	return (0);
 }
 
