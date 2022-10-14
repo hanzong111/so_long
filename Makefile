@@ -6,7 +6,7 @@
 #    By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 20:26:19 by ojing-ha          #+#    #+#              #
-#    Updated: 2022/10/14 15:14:27 by ojing-ha         ###   ########.fr        #
+#    Updated: 2022/10/14 21:35:05 by ojing-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_FILES	= so_long_main\
 				sl_animations\
 				sl_move_list\
 				sl_move_list_utils\
+				sl_path_check\
 		
 
 SRCS	= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))

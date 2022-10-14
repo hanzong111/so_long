@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/14 15:30:43 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/14 23:12:07 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	render_next_frame(t_data *data)
 	check_move_list(data);
 	choose_frame(i, data);
 	render_map(data);
-	// enemy_move(data, i);
 	mlx_put_image_to_window(data->mlx, data->window, data->final_img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->final_img.img);
 	return (0);
@@ -91,16 +90,13 @@ int	main(int argc, char **argv)
 
 	var_init(&data);
 	error_check(argc, argv, &data.map);
-	grid_gen(argv, &data.map, &data);
 	ft_printf("Checking map...\n");
+	grid_gen(argv, &data.map, &data);
+	path_check(argv, &data);
 	data.mlx = mlx_init();
 	data.window = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "so_long");
 	get_sprites(&data);
 	ft_printf("Getting beautiful sprites...\n");
-	data.enemy.ff = data.sprites.coin_1;
-	data.enemy.x = 6 * SPRITE_W;
-	data.enemy.y = 6 * SPRITE_H;
-	data.enemy.counter = 0;
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_key_hook(data.window, event, &data);
 	mlx_hook(data.window, ON_DESTROY, 0L, sl_close_window, &data);

@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:22:32 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/14 16:08:11 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/14 22:08:25 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void	var_init(t_data *data)
 	data->counters.exit_status = EXIT_CLOSED;
 	data->player.move_list = NULL;
 	data->counters.loop_count = 0;
+	data->path.coins = 0;
+	data->path.exit = 0;
 }

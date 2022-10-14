@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/14 16:13:36 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/14 23:12:14 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,12 @@ typedef struct s_sl_counters
 	int	loop_count;
 }	t_sl_counters;
 
+typedef struct s_sl_path_check
+{
+	int	coins;
+	int	exit;
+}	t_sl_path_check;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -126,12 +132,14 @@ typedef struct s_data
 	t_sl_sprites	sprites;
 	t_sl_img		final_img;
 	t_sl_map		map;
+	t_sl_map		flood_map;
 	t_sl_player		enemy;
 	t_sl_player		player;
 
 	t_sl_img		coin_ff;
 	t_sl_img		door_ff;
 	t_sl_counters	counters;
+	t_sl_path_check	path;
 }	t_data;
 
 void		sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y);
@@ -150,5 +158,6 @@ void		sl_lstadd_back(t_sl_list **lst, t_sl_list *new);
 t_sl_list	*sl_lstnew(int content);
 void		check_move_list(t_data *data);
 int			check_move(t_data *data, int x, int y);
+void		path_check(char **argv, t_data *data);
 
 #endif
