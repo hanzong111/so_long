@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/14 23:12:14 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:12:50 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,15 @@ typedef struct s_sl_list
 	struct s_sl_list	*next;
 }	t_sl_list;
 
+typedef struct s_sl_enemy
+{
+	int				x;
+	int				y;
+}	t_sl_enemy;
+
 typedef struct s_sl_player
 {
 	t_sl_img		ff;
-	int				counter;
 	int				x;
 	int				y;
 	int				state;
@@ -133,9 +138,11 @@ typedef struct s_data
 	t_sl_img		final_img;
 	t_sl_map		map;
 	t_sl_map		flood_map;
-	t_sl_player		enemy;
-	t_sl_player		player;
 
+	t_sl_player		player;
+	t_sl_enemy		**enemy_list;
+
+	t_sl_img		enemy_ff;
 	t_sl_img		coin_ff;
 	t_sl_img		door_ff;
 	t_sl_counters	counters;

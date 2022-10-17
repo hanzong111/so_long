@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 22:15:47 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/14 16:09:17 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:43:47 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,32 @@ int	check_place(t_data *data)
 	return (0);
 }
 
+void	move_enemies(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->enemy_list[i] != NULL)
+	{
+		if (data->player.move_list->content == MOVE_UP)
+				data->enemy_list[i]->y -= SPRITE_H / PLAYER_MOVE;
+		else if (data->player.move_list->content == MOVE_DOWN)
+			data->enemy_list[i]->y += SPRITE_H / PLAYER_MOVE;
+		else if (data->player.move_list->content == MOVE_LEFT)
+			data->enemy_list[i]->x -= SPRITE_W / PLAYER_MOVE;
+		else if (data->player.move_list->content == MOVE_RIGHT)
+			data->enemy_list[i]->x += SPRITE_W / PLAYER_MOVE;
+		i++;
+	}
+}
+
 void	move_player(t_data *data)
 {
 	t_sl_list	*temp;
 
 	if (data->player.move_list)
 	{
+		move_enemies(data);
 		if (data->player.move_list->content == MOVE_UP)
 				data->player.y -= SPRITE_H / PLAYER_MOVE;
 		else if (data->player.move_list->content == MOVE_DOWN)

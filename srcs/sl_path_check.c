@@ -6,19 +6,11 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 21:30:03 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/14 23:22:57 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:38:36 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-// void	data_count(t_data *data, char var)
-// {
-// 	if (var == 'C')
-// 		data->path.coins++;
-// 	else if (var == 'E')
-// 		data->path.exit++;
-// }
 
 void	flood_fill(t_data *data, char **grid, int x, int y)
 {
@@ -63,9 +55,42 @@ void	flood_grid_gen(char **argv, t_data *data)
 	close(fd);
 }
 
+int	set_enemy_position(int x, int y, int counter, t_data *data)
+{
+	data->enemy_list[counter] = (t_sl_enemy *)malloc(sizeof(t_sl_enemy) * 2);
+	data->enemy_list[counter][0].x = x * SPRITE_W;
+	data->enemy_list[counter][0].y = y * SPRITE_H;
+	return (counter + 1);
+}
+
+void	get_enemy_positions(t_data *data)
+{
+	int	x;
+	int	y;
+	int	counter;
+
+	y = 0;
+	counter = 0;
+	data->enemy_list = (t_sl_enemy **)malloc(sizeof(t_sl_enemy *)
+			* (data->map.enemy + 1));
+	data->enemy_list[data->map.enemy] = NULL;
+	while (y < data->map.map_h)
+	{
+		x = 0;
+		while (data->flood_map.grid[y][x] != '\0')
+		{
+			if (data->flood_map.grid[y][x] == 'N')
+				counter = set_enemy_position(x, y, counter, data);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	path_check(char **argv, t_data *data)
 {
 	flood_grid_gen(argv, data);
+	get_enemy_positions(data);
 	flood_fill(data, data->flood_map.grid, data->player.x / SPRITE_W,
 		data->player.y / SPRITE_H);
 	if (data->path.coins != data->map.coins)
