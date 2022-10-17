@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 19:40:25 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:29:12 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,13 @@ int	event(int keycode, t_data *data)
 	return (0);
 }
 
-void	add_enemy(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->enemy_list[i] != NULL)
-	{
-		if (data->start_x + (data->enemy_list[i]->x) < -SPRITE_W)
-			return ;
-		else
-			sl_copy_image(&data->sprites.player_1, &data->final_img,
-				data->start_x + (data->enemy_list[i]->x),
-				data->start_y + (data->enemy_list[i]->y));
-		i++;
-	}
-}
-
 int	render_next_frame(t_data *data)
 {
-	static int	i;
+	static int	tick;
 
-	i++;
+	tick++;
 	check_move_list(data);
-	choose_frame(i, data);
+	choose_frame(tick, data);
 	render_map(data);
 	add_enemy(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->final_img.img, 0, 0);

@@ -6,91 +6,11 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 22:15:47 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 19:43:47 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:41:38 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-int	check_move(t_data *data, int x, int y)
-{
-	if (data->player.move_list == NULL)
-		return (0);
-	if (data->player.move_list->content == MOVE_UP) /* W  || 13*/
-	{	
-		if (data->map.grid[y - 1][x] == '1')
-			return (1);
-	}
-	else if (data->player.move_list->content == MOVE_DOWN) /* S  || 1*/
-	{
-		if (data->map.grid[y + 1][x] == '1')
-			return (1);
-	}
-	else if (data->player.move_list->content == MOVE_LEFT) /* A  || 0*/
-	{
-		if (data->map.grid[y][x - 1] == '1')
-			return (1);
-	}
-	else if (data->player.move_list->content == MOVE_RIGHT) /* D  || 2*/
-	{
-		if (data->map.grid[y][x + 1] == '1')
-			return (1);
-	}
-	return (0);
-}
-
-void	check_coins_exit(t_data *data, int x, int y)
-{
-	if (data->map.grid[y][x] == 'C')
-	{
-		data->map.grid[y][x] = '0';
-		data->counters.picked_coins++;
-	}
-	if (data->map.coins == data->counters.picked_coins)
-	{
-		data->counters.exit_status = EXIT_OPENED;
-		data->door_ff = data->sprites.door_o;
-	}
-	if (data->map.grid[y][x] == 'E')
-	{
-		if (data->counters.exit_status == EXIT_OPENED)
-		{
-			ft_printf("Congratz ! U have won nothing :)\n");
-			exit (0);
-		}
-		else
-			ft_printf("Pls collect all the coins before exiting :(\n");
-	}
-}
-
-int	check_place(t_data *data)
-{
-	if (data->player.x % SPRITE_W == 0)
-	{
-		if (data->player.y % SPRITE_H == 0)
-			return (1);
-	}
-	return (0);
-}
-
-void	move_enemies(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->enemy_list[i] != NULL)
-	{
-		if (data->player.move_list->content == MOVE_UP)
-				data->enemy_list[i]->y -= SPRITE_H / PLAYER_MOVE;
-		else if (data->player.move_list->content == MOVE_DOWN)
-			data->enemy_list[i]->y += SPRITE_H / PLAYER_MOVE;
-		else if (data->player.move_list->content == MOVE_LEFT)
-			data->enemy_list[i]->x -= SPRITE_W / PLAYER_MOVE;
-		else if (data->player.move_list->content == MOVE_RIGHT)
-			data->enemy_list[i]->x += SPRITE_W / PLAYER_MOVE;
-		i++;
-	}
-}
 
 void	move_player(t_data *data)
 {
@@ -98,7 +18,6 @@ void	move_player(t_data *data)
 
 	if (data->player.move_list)
 	{
-		move_enemies(data);
 		if (data->player.move_list->content == MOVE_UP)
 				data->player.y -= SPRITE_H / PLAYER_MOVE;
 		else if (data->player.move_list->content == MOVE_DOWN)
@@ -114,6 +33,7 @@ void	move_player(t_data *data)
 		temp = data->player.move_list;
 		check_coins_exit(data, data->player.x / SPRITE_W,
 			data->player.y / SPRITE_H);
+		check_players_hit_enemies(data);
 		data->player.move_list = data->player.move_list->next;
 		free(temp);
 		data->counters.player_moves++;
@@ -124,8 +44,10 @@ void	check_move_list(t_data *data)
 {
 	t_sl_list	*temp;
 
-	if (check_move(data, data->player.x / SPRITE_W,
-			data->player.y / SPRITE_H) && check_place(data))
+	enemies(data);
+	if (check_wall(data, data->player.x / SPRITE_W,
+			data->player.y / SPRITE_H) && check_place(data->player.x,
+			data->player.y))
 	{
 		temp = data->player.move_list;
 		data->player.move_list = data->player.move_list->next;

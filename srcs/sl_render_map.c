@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 21:54:05 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 17:55:31 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:21:36 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	copy_tile(t_data *data, int x, int y)
 		print_exit(data, x, y);
 	else if (data->map.grid[y][x] == '1')
 		print_wall(data, x, y);
-	else if (data->map.grid[y][x] == '0' || data->map.grid[y][x] == 'P')
+	else if (data->map.grid[y][x] == '0' || data->map.grid[y][x] == 'P' ||
+			data->map.grid[y][x] == 'N')
 		print_floor(data, x, y);
 }
 

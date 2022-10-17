@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 18:12:50 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:42:52 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 
 # define EXIT_CLOSED 1
 # define EXIT_OPENED 2
+
+# define MOVING 1
+# define STATIC 2
 
 // Event definition
 # define ON_DESTROY 17
@@ -133,6 +136,7 @@ typedef struct s_data
 	void			*window;
 	int				start_x;
 	int				start_y;
+	int				enemy_state;
 
 	t_sl_sprites	sprites;
 	t_sl_img		final_img;
@@ -166,5 +170,12 @@ t_sl_list	*sl_lstnew(int content);
 void		check_move_list(t_data *data);
 int			check_move(t_data *data, int x, int y);
 void		path_check(char **argv, t_data *data);
+void		move_enemies(t_data *data, int i);
+void		enemies(t_data *data);
+int			check_place(int x, int y);
+int			check_wall(t_data *data, int x, int y);
+void		add_enemy(t_data *data);
+void		check_coins_exit(t_data *data, int x, int y);
+void		check_players_hit_enemies(t_data *data);
 
 #endif
