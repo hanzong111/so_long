@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 22:42:52 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:45:49 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define SPRITE_W 64
 # define SPRITE_H 64
 
-# define ENEMY_STEPS 2
 # define PLAYER_MOVE 4
-# define PLAYER_ANIM 20
+# define PLAYER_ANIM 40
+# define ENEMY_ANIM 64
 # define COIN_ANIM 30
 
 # define MOVE_UP 1
@@ -88,6 +88,17 @@ typedef struct s_sl_sprites
 	t_sl_img		player_2;
 	t_sl_img		player_3;
 	t_sl_img		player_4;
+	t_sl_img		player_5;
+	t_sl_img		player_6;
+	t_sl_img		player_7;
+	t_sl_img		player_8;
+	t_sl_img		player_9;
+
+	t_sl_img		enemy_1;
+	t_sl_img		enemy_2;
+	t_sl_img		enemy_3;
+	t_sl_img		enemy_4;
+
 	t_sl_img		door_o;
 	t_sl_img		door_c;
 	t_sl_img		floor;

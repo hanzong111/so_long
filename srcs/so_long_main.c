@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 22:29:12 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:52:20 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 int	event(int keycode, t_data *data)
 {
 	if (keycode == 53) /*65307 || 53*/
+	{
+		ft_printf("Esc pressed.\n");
+		ft_printf("Exiting so_long ...\n");
 		exit(0);
+	}
 	if (keycode == 13) /* W  || 13*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
 	if (keycode == 1) /* S  || 1*/
@@ -63,10 +67,12 @@ int	main(int argc, char **argv)
 	path_check(argv, &data);
 	data.mlx = mlx_init();
 	data.window = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "so_long");
-	get_sprites(&data);
 	ft_printf("Getting beautiful sprites...\n");
+	get_sprites(&data);
+	ft_printf("Starting game !!!\n");
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_key_hook(data.window, event, &data);
 	mlx_hook(data.window, ON_DESTROY, 0L, sl_close_window, &data);
 	mlx_loop(data.mlx);
+	system("leaks so_long");
 }

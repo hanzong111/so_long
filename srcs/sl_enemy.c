@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 22:14:59 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 22:42:04 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:33:03 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,9 @@ void	add_enemy(t_data *data)
 	i = 0;
 	while (data->enemy_list[i] != NULL)
 	{
-		if (data->start_x + (data->enemy_list[i]->x) < -SPRITE_W)
-			return ;
-		else
-			sl_copy_image(&data->sprites.player_1, &data->final_img,
-				data->start_x + (data->enemy_list[i]->x),
-				data->start_y + (data->enemy_list[i]->y));
+		sl_copy_image(&data->enemy_ff, &data->final_img,
+			data->start_x + (data->enemy_list[i]->x),
+			data->start_y + (data->enemy_list[i]->y));
 		i++;
 	}
 }
