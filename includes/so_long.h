@@ -6,15 +6,15 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/18 18:45:49 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 04:01:29 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <mlx.h>
-// # include "../minilibx-linux/mlx.h"
+// # include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -80,6 +80,9 @@ typedef struct s_sl_map
 
 typedef struct s_sl_sprites
 {
+	t_sl_img		numbers[10];
+	t_sl_img		move;
+	
 	t_sl_img		coin_1;
 	t_sl_img		coin_2;
 	t_sl_img		coin_3;
@@ -188,5 +191,6 @@ int			check_wall(t_data *data, int x, int y);
 void		add_enemy(t_data *data);
 void		check_coins_exit(t_data *data, int x, int y);
 void		check_players_hit_enemies(t_data *data);
+void		generate_ui(t_data *data);
 
 #endif

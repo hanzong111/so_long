@@ -6,7 +6,7 @@
 #    By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 20:26:19 by ojing-ha          #+#    #+#              #
-#    Updated: 2022/10/18 18:47:52 by ojing-ha         ###   ########.fr        #
+#    Updated: 2022/10/26 03:41:03 by ojing-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,14 @@ NAME		= so_long
 CC			= gcc
 
 LIBFT_DIR	= libft/
-MLX_DIR	= mlx/
-#MLX_DIR	= minilibx-linux/
+#MLX_DIR	= mlx/
+MLX_DIR	= minilibx-linux/
 SRCS_DIR	= srcs/
 OBJS_DIR	= objs/
 
 INCLUDES	= -I includes
 
-CFLAGS	= -Wall -Werror -Wextra $(HEADER) #-fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra $(HEADER) -fsanitize=address -g3
 LIBFTFLAGS	= -L$(LIBFT_DIR) -lft
 MLXFLAGS	= -lmlx -framework OpenGL -framework Appkit
 
@@ -50,6 +50,7 @@ SRC_FILES	= so_long_main\
 				sl_path_check\
 				sl_enemy\
 				sl_events\
+				sl_generate_ui\
 		
 
 SRCS	= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -60,7 +61,7 @@ all		:
 		@echo "$(MAGENTA) --------------------------INSIDE LIBFT-------------------------- $(CYAN)"
 		@echo "\n"
 		@make -C ${LIBFT_DIR}
-		#make -C ${MLX_DIR}
+		make -C ${MLX_DIR}
 		@echo "$(MAGENTA) --------------------------INSIDE SO_LONG-------------------------- $(CYAN)"
 		@echo "\n"
 		make $(NAME)
@@ -68,18 +69,18 @@ all		:
 		@echo "\n"
 		@echo "$(GREEN) -------------$(RED)I $(CYAN)AM $(GREEN)DONE $(YELLOW)MADAFAKA$(GREEN)-------------------------- $(DEF_COLOR)"
 
-$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
-				@$(CC) $(CFLAGS) -c $^ -o $@
-				@echo "$(GREEN)Compiling $<...$(DEF_COLOR)"
 #$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
-#				@$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
-#				@echo "$(GREEN)Compiling $<$(DEF_COLOR)"
+#				@$(CC) $(CFLAGS) -c $^ -o $@
+#				@echo "$(GREEN)Compiling $<...$(DEF_COLOR)"
+$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
+				@$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+				@echo "$(GREEN)Compiling $<$(DEF_COLOR)"
 
 
-$(NAME)	: ${OBJS}
-		@$(CC) $(CFLAGS) $(LIBFTFLAGS) $(MLXFLAGS) $(OBJS) -o $(NAME)
-#$(NAME): $(OBJS)
-#	$(CC) $(CFLAGS) $(OBJS) $(LIBFTFLAGS) -L${MLX_DIR} -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+#$(NAME)	: ${OBJS}
+#		@$(CC) $(CFLAGS) $(LIBFTFLAGS) $(MLXFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFTFLAGS) -L${MLX_DIR} -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 
 clean	:

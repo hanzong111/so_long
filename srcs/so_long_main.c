@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/18 18:52:20 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 03:41:09 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 
 int	event(int keycode, t_data *data)
 {
-	if (keycode == 53) /*65307 || 53*/
+	if (keycode == 65307) /*65307 || 53*/
 	{
 		ft_printf("Esc pressed.\n");
 		ft_printf("Exiting so_long ...\n");
 		exit(0);
 	}
-	if (keycode == 13) /* W  || 13*/
+	if (keycode == 'w') /* W  || 13*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
-	if (keycode == 1) /* S  || 1*/
+	if (keycode == 's') /* S  || 1*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
-	if (keycode == 0) /* A  || 0*/
+	if (keycode == 'a') /* A  || 0*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
-	if (keycode == 2) /* D  || 2*/
+	if (keycode == 'd') /* D  || 2*/
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
 	return (0);
 }
@@ -42,6 +42,7 @@ int	render_next_frame(t_data *data)
 	choose_frame(tick, data);
 	render_map(data);
 	add_enemy(data);
+	generate_ui(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->final_img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->final_img.img);
 	return (0);
@@ -74,5 +75,4 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data.window, event, &data);
 	mlx_hook(data.window, ON_DESTROY, 0L, sl_close_window, &data);
 	mlx_loop(data.mlx);
-	system("leaks so_long");
 }

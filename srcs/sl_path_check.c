@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 21:30:03 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 19:38:36 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/19 20:19:19 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	flood_fill(t_data *data, char **grid, int x, int y)
 {
-	int	w;
-	int	h;
-
-	w = data->map.map_w;
-	h = data->map.map_h;
 	if (grid[y][x] == '1')
 		return ;
 	else
