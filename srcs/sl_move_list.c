@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 22:15:47 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 22:41:38 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/27 06:59:09 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,22 @@ void	move_player(t_data *data)
 	}
 }
 
+int	player_not_moving(t_data *data)
+{
+	if (check_wall(data, data->player.x / SPRITE_W,
+			data->player.y / SPRITE_H) && check_place(data->player.x,
+			data->player.y))
+		return (1);
+	else
+		return (0);
+}
+
 void	check_move_list(t_data *data)
 {
 	t_sl_list	*temp;
 
 	enemies(data);
-	if (check_wall(data, data->player.x / SPRITE_W,
-			data->player.y / SPRITE_H) && check_place(data->player.x,
-			data->player.y))
+	if (player_not_moving(data))
 	{
 		temp = data->player.move_list;
 		data->player.move_list = data->player.move_list->next;

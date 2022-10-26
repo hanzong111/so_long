@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 18:08:26 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/27 06:55:24 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@
 
 int	event(int keycode, t_data *data)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		ft_printf("Esc pressed.\n");
 		ft_printf("Exiting so_long ...\n");
 		exit(0);
 	}
-	if (keycode == 13)
+	if (keycode == 'w')
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
-	if (keycode == 1)
+	if (keycode == 's')
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
-	if (keycode == 0)
+	if (keycode == 'a')
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
-	if (keycode == 2)
+	if (keycode == 'd')
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
 	return (0);
 }

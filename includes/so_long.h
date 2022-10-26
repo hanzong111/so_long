@@ -6,30 +6,36 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 18:25:27 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/27 07:21:32 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <mlx.h>
-// # include "../minilibx-linux/mlx.h"
+// # include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-
+// Dont Change This :(
 # define SCREEN_W 960
 # define SCREEN_H 960
+
+// In pixels
 # define SPRITE_W 64
 # define SPRITE_H 64
 
+// Steps taken to walk thru a block
 # define PLAYER_MOVE 4
+
+// Ticks per cycle
 # define PLAYER_ANIM 40
 # define ENEMY_ANIM 64
 # define COIN_ANIM 30
 
+// Some Events
 # define MOVE_UP 1
 # define MOVE_DOWN 2
 # define MOVE_LEFT 3
@@ -37,9 +43,6 @@
 
 # define EXIT_CLOSED 1
 # define EXIT_OPENED 2
-
-# define MOVING 1
-# define STATIC 2
 
 // Event definition
 # define ON_DESTROY 17
@@ -168,29 +171,42 @@ typedef struct s_data
 }	t_data;
 
 void		sl_copy_image(t_sl_img *src, t_sl_img *des, int x, int y);
+
 void		error_check(int argc, char **argv, t_sl_map *map);
 void		format_check(char **argv, t_sl_map *map);
 void		grid_gen(char **argv, t_sl_map *map, t_data *data);
+
 void		var_init(t_data *data);
+
 void		render_map(t_data *data);
 void		print_floor(t_data *data, int x, int y);
 void		print_wall(t_data *data, int x, int y);
 void		print_coin(t_data *data, int x, int y);
 void		print_exit(t_data *data, int x, int y);
 void		get_sprites(t_data *data);
+
 void		choose_frame(int tick, t_data *data);
+
 void		sl_lstadd_back(t_sl_list **lst, t_sl_list *new);
 t_sl_list	*sl_lstnew(int content);
+
 void		check_move_list(t_data *data);
 int			check_move(t_data *data, int x, int y);
+
 void		path_check(char **argv, t_data *data);
+
 void		move_enemies(t_data *data);
 void		enemies(t_data *data);
+void		add_enemy(t_data *data);
+
 int			check_place(int x, int y);
 int			check_wall(t_data *data, int x, int y);
-void		add_enemy(t_data *data);
+
 void		check_coins_exit(t_data *data, int x, int y);
 void		check_players_hit_enemies(t_data *data);
+
 void		generate_ui(t_data *data);
+
+int			player_not_moving(t_data *data);
 
 #endif

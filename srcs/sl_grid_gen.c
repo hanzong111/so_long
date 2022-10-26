@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:16:07 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 17:49:49 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/27 07:16:40 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ void	get_player_position(t_data *data)
 	}
 }
 
+void	pec_check(t_sl_map *map)
+{
+	if (map->player == 0 || map->exit == 0 || map->coins == 0)
+	{
+		if (map->player == 0)
+			ft_printf("Error\nThere needs to be at least 1 player\n");
+		else if (map->exit == 0)
+			ft_printf("Error\nThere needs to be at least 1 exit\n");
+		else if (map->coins == 0)
+			ft_printf("Error\nThere needs to be at least 1 collectable\n");
+		exit (0);
+	}
+}
+
 void	grid_gen(char **argv, t_sl_map *map, t_data *data)
 {
 	int	fd;
@@ -79,13 +93,6 @@ void	grid_gen(char **argv, t_sl_map *map, t_data *data)
 		map->line = get_next_line(fd);
 	}
 	close(fd);
-	if (map->player == 0 || map->exit == 0)
-	{
-		if (map->player == 0)
-			ft_printf("Error\nThere needs to be at least 1 player\n");
-		else
-			ft_printf("Error\nThere needs to be at least 1 exit\n");
-		exit (0);
-	}
+	pec_check(map);
 	get_player_position(data);
 }
