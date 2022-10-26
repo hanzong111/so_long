@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:16:07 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/17 17:58:39 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:49:49 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void	map_char_count(t_sl_map *map, char *str)
 			map->player++;
 		else if (*str == 'N')
 			map->enemy++;
-		if (map->player >= 2 || map->exit >= 2)
+		if (map->player >= 2 || map->exit >= 2 || map->enemy >= 2)
 		{
 			if (map->player >= 2)
 				ft_printf("Error\nThere can only be 1 Player\n");
-			else
+			else if (map->exit >= 2)
 				ft_printf("Error\nThere can only be 1 exit\n");
+			else if (map->enemy >= 2)
+				ft_printf("Error\nThere can only be 1 enemy\n");
 			exit (0);
 		}
 		str++;

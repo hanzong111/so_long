@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 03:40:20 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 04:03:11 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:16:04 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	generate_ui(t_data *data)
 	init = num;
 	while (*num != '\0')
 	{
-		sl_copy_image(&data->sprites.numbers[*num - '0'], &data->final_img, position, 10);
+		sl_copy_image(&data->sprites.numbers[*num - '0'],
+			&data->final_img, position, 10);
 		position += 110;
 		num++;
 	}

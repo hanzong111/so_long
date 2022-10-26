@@ -6,29 +6,34 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:53:55 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 03:41:09 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:08:26 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
 /*	export DISPLAY=localhost:0.0	*/
+/*	65307 || 53						*/
+/* 	W  	  || 13						*/
+/*	S  	  || 1						*/
+/* 	A  	  || 0						*/
+/*	D  	  || 2						*/
 
 int	event(int keycode, t_data *data)
 {
-	if (keycode == 65307) /*65307 || 53*/
+	if (keycode == 53)
 	{
 		ft_printf("Esc pressed.\n");
 		ft_printf("Exiting so_long ...\n");
 		exit(0);
 	}
-	if (keycode == 'w') /* W  || 13*/
+	if (keycode == 13)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
-	if (keycode == 's') /* S  || 1*/
+	if (keycode == 1)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
-	if (keycode == 'a') /* A  || 0*/
+	if (keycode == 0)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
-	if (keycode == 'd') /* D  || 2*/
+	if (keycode == 2)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
 	return (0);
 }
@@ -41,7 +46,8 @@ int	render_next_frame(t_data *data)
 	check_move_list(data);
 	choose_frame(tick, data);
 	render_map(data);
-	add_enemy(data);
+	if (data->map.enemy != 0)
+		add_enemy(data);
 	generate_ui(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->final_img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->final_img.img);

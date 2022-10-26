@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 22:34:43 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/18 18:50:14 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:56:41 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ int	check_wall(t_data *data, int x, int y)
 {
 	if (data->player.move_list == NULL)
 		return (0);
-	if (data->player.move_list->content == MOVE_UP) /* W  || 13*/
+	if (data->player.move_list->content == MOVE_UP)
 	{	
 		if (data->map.grid[y - 1][x] == '1')
 			return (1);
 	}
-	else if (data->player.move_list->content == MOVE_DOWN) /* S  || 1*/
+	else if (data->player.move_list->content == MOVE_DOWN)
 	{
 		if (data->map.grid[y + 1][x] == '1')
 			return (1);
 	}
-	else if (data->player.move_list->content == MOVE_LEFT) /* A  || 0*/
+	else if (data->player.move_list->content == MOVE_LEFT)
 	{
 		if (data->map.grid[y][x - 1] == '1')
 			return (1);
 	}
-	else if (data->player.move_list->content == MOVE_RIGHT) /* D  || 2*/
+	else if (data->player.move_list->content == MOVE_RIGHT)
 	{
 		if (data->map.grid[y][x + 1] == '1')
 			return (1);
@@ -75,19 +75,12 @@ int	check_place(int x, int y)
 
 void	check_players_hit_enemies(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (data->enemy_list[i] != NULL)
+	if (data->player.x == data->enemy.x)
 	{
-		if (data->player.x == data->enemy_list[i]->x)
+		if (data->player.y == data->enemy.y)
 		{
-			if (data->player.y == data->enemy_list[i]->y)
-			{
-				ft_printf("You Died :(\n");
-				exit (0);
-			}
+			ft_printf("You Died :(\n");
+			exit (0);
 		}
-		i++;
 	}
 }

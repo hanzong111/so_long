@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 21:30:03 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/19 20:19:19 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:08:47 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,23 @@ void	flood_grid_gen(char **argv, t_data *data)
 	close(fd);
 }
 
-int	set_enemy_position(int x, int y, int counter, t_data *data)
-{
-	data->enemy_list[counter] = (t_sl_enemy *)malloc(sizeof(t_sl_enemy) * 2);
-	data->enemy_list[counter][0].x = x * SPRITE_W;
-	data->enemy_list[counter][0].y = y * SPRITE_H;
-	return (counter + 1);
-}
-
 void	get_enemy_positions(t_data *data)
 {
 	int	x;
 	int	y;
-	int	counter;
 
 	y = 0;
-	counter = 0;
-	data->enemy_list = (t_sl_enemy **)malloc(sizeof(t_sl_enemy *)
-			* (data->map.enemy + 1));
-	data->enemy_list[data->map.enemy] = NULL;
 	while (y < data->map.map_h)
 	{
 		x = 0;
 		while (data->flood_map.grid[y][x] != '\0')
 		{
 			if (data->flood_map.grid[y][x] == 'N')
-				counter = set_enemy_position(x, y, counter, data);
+			{
+				data->enemy.x = x * SPRITE_W;
+				data->enemy.y = y * SPRITE_H;
+				return ;
+			}
 			x++;
 		}
 		y++;

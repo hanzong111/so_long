@@ -6,15 +6,15 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 04:01:29 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:54:12 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-// # include <mlx.h>
-# include "../minilibx-linux/mlx.h"
+# include <mlx.h>
+// # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -158,7 +158,7 @@ typedef struct s_data
 	t_sl_map		flood_map;
 
 	t_sl_player		player;
-	t_sl_enemy		**enemy_list;
+	t_sl_enemy		enemy;
 
 	t_sl_img		enemy_ff;
 	t_sl_img		coin_ff;
@@ -184,7 +184,7 @@ t_sl_list	*sl_lstnew(int content);
 void		check_move_list(t_data *data);
 int			check_move(t_data *data, int x, int y);
 void		path_check(char **argv, t_data *data);
-void		move_enemies(t_data *data, int i);
+void		move_enemies(t_data *data);
 void		enemies(t_data *data);
 int			check_place(int x, int y);
 int			check_wall(t_data *data, int x, int y);
