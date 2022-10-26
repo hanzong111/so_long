@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 21:30:03 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 18:08:47 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:21:41 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	get_enemy_positions(t_data *data)
 void	path_check(char **argv, t_data *data)
 {
 	flood_grid_gen(argv, data);
-	get_enemy_positions(data);
+	if (data->map.enemy != 0)
+		get_enemy_positions(data);
 	flood_fill(data, data->flood_map.grid, data->player.x / SPRITE_W,
 		data->player.y / SPRITE_H);
 	if (data->path.coins != data->map.coins)

@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:54:10 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 17:54:12 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:25:27 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_sl_sprites
 {
 	t_sl_img		numbers[10];
 	t_sl_img		move;
-	
+
 	t_sl_img		coin_1;
 	t_sl_img		coin_2;
 	t_sl_img		coin_3;

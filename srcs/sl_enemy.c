@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 22:14:59 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/26 18:11:38 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:23:46 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	enemies(t_data *data)
 {
 	int	counter;
 
-	if (!(check_wall(data, data->player.x / SPRITE_W,
-				data->player.y / SPRITE_H) && check_place(
-				data->player.x, data->player.y)))
+	if (!(check_wall(data, data->enemy.x / SPRITE_W,
+				data->enemy.y / SPRITE_H) && check_place(
+				data->enemy.x, data->enemy.y)))
 	{
 		if (check_wall(data, data->player.x / SPRITE_W,
 				data->player.y / SPRITE_H) && check_place(data->player.x,
