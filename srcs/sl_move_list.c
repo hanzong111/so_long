@@ -6,7 +6,7 @@
 /*   By: ojing-ha <ojing-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 22:15:47 by ojing-ha          #+#    #+#             */
-/*   Updated: 2022/10/27 06:59:09 by ojing-ha         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:04:49 by ojing-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	check_move_list(t_data *data)
 {
 	t_sl_list	*temp;
 
-	enemies(data);
+	if (data->map.enemy != 0)
+		enemies(data);
 	if (player_not_moving(data))
 	{
 		temp = data->player.move_list;
