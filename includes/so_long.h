@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 // # include <mlx.h>
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx_linux/mlx.h"
 # include "../libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -22,6 +22,20 @@
 // Dont Change This :(
 # define SCREEN_W 960
 # define SCREEN_H 960
+
+//Linux
+# define KEY_UP 'w'
+# define KEY_DOWN 's'
+# define KEY_LEFT 'a'
+# define KEY_RIGHT 'd'
+# define KEY_ESC 65307
+
+//MAC
+// # define KEY_UP 13
+// # define KEY_DOWN 1
+// # define KEY_LEFT 0
+// # define KEY_RIGHT 2
+// # define KEY_ESC 53
 
 // In pixels
 # define SPRITE_W 64

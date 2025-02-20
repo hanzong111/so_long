@@ -12,28 +12,21 @@
 
 #include "../includes/so_long.h"
 
-/*	export DISPLAY=localhost:0.0	*/
-/*	65307 || 53						*/
-/* 	W  	  || 13						*/
-/*	S  	  || 1						*/
-/* 	A  	  || 0						*/
-/*	D  	  || 2						*/
-
 int	event(int keycode, t_data *data)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 	{
 		ft_printf("Esc pressed.\n");
 		ft_printf("Exiting so_long ...\n");
 		exit(0);
 	}
-	if (keycode == 13)
+	if (keycode == KEY_UP)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_UP));
-	if (keycode == 1)
+	if (keycode == KEY_DOWN)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_DOWN));
-	if (keycode == 0)
+	if (keycode == KEY_LEFT)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_LEFT));
-	if (keycode == 2)
+	if (keycode == KEY_RIGHT)
 		sl_lstadd_back(&data->player.move_list, sl_lstnew(MOVE_RIGHT));
 	return (0);
 }
