@@ -2,8 +2,8 @@
 **so_long** is a simple 2D game project developed as part of the 42 Coding School curriculum. The goal of this project is to create a small game using **MinilibX**, where the player navigates a character through a maze, collecting collectibles, avoiding enemies, and reaching the exit.
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=3QXR1Fd46A4">
-    <img src="readme_utils/thumbnail.png" alt="Dynamic Map Generation Video" width="600">
+  <a href="https://www.youtube.com/watch?v=Xwj-zIGUVDw">
+    <img src="readme_utils/so_long.png" alt="Dynamic Map Generation Video" width="600">
   </a>
 </p>
 
