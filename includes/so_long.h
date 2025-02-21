@@ -47,7 +47,7 @@
 // Ticks per cycle
 # define PLAYER_ANIM 40
 # define ENEMY_ANIM 64
-# define COIN_ANIM 30
+# define COIN_ANIM 35
 
 // Some Events
 # define MOVE_UP 1
